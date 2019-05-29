@@ -1,5 +1,8 @@
 {
-  "name": "@bengler/exif-reader",
+  "name": "@sanity/exif-reader",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "version": "1.0.3",
   "description": "A small EXIF image metadata reader",
   "main": "index.js",
@@ -25,6 +28,6 @@
   },
   "homepage": "https://github.com/devongovett/exif-reader",
   "devDependencies": {
-    "mocha": "^2.1.0"
+    "mocha": "^6.1.4"
   }
 }
