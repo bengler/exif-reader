@@ -1,6 +1,6 @@
 {
-  "name": "exif-reader",
-  "version": "1.0.3",
+  "name": "@sanity/exif-reader",
+  "version": "1.0.4",
   "description": "A small EXIF image metadata reader",
   "main": "index.js",
   "directories": {
