@@ -6,6 +6,7 @@ var expect = require('unexpected')
 var chanceGenerators = require('chance-generators');
 var tetons = fs.readFileSync(__dirname + '/data/tetons.exif');
 var IMG_0774 = fs.readFileSync(__dirname + '/data/IMG_0774.exif');
+var pngExifTag = fs.readFileSync(__dirname + '/data/png.exif');
 
 describe('exif-reader', function() {
   it('should read tiff and exif data', function() {
@@ -125,11 +126,18 @@ describe('exif-reader', function() {
            GPSDateStamp: '2015:03:01' } });
   });
 
-  it('should error when missing Exif tag', function() {
-    expect(function() {
-      exif(Buffer.alloc(50));
-    }, 'to throw', /buffer should start with "Exif"/);
-  });
+  it('should read exif info from png eXIf shaped data (no Exif\0 prefix)', function() {
+    expect(exif(pngExifTag), 'to equal',
+      { image:
+         { XResolution: 144,
+           YResolution: 144,
+           ResolutionUnit: 2,
+           ExifOffset: 78 },
+        exif:
+         { UserComment: Buffer.from([0x41, 0x53, 0x43, 0x49, 0x49, 0x00, 0x00, 0x00, 0x53, 0x63, 0x72, 0x65, 0x65, 0x6e, 0x73, 0x68, 0x6f, 0x74]),
+           PixelXDimension: 1880,
+           PixelYDimension: 1034 }});
+  })
 
   it('should error when missing byte order marker', function() {
     expect(function() {
